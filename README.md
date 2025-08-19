@@ -1,8 +1,4 @@
-Got it 👍 Since your **ATM application** uses OOP, custom exceptions, and file handling, here’s a clean and professional **README.md** draft for your GitHub repo:
-
----
-
-# 🏦 ATM Application (Java)
+ 🏦 ATM Application (Java)
 
 ## 📌 Overview
 
@@ -109,5 +105,3 @@ Login Successful!
 [GitHub Profile](https://github.com/Santoosh13)
 
 ---
-
-Do you want me to also **add screenshots / demo GIFs** section so your repo looks more professional when recruiters check it?
