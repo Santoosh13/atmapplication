@@ -1,12 +1,16 @@
 package com.ATM.atmapplication;
+import com.ATM.atmapplication.exceptions.InsufficentFundsException;
 import java.util.*;
-public class Accounts {
+import java.io.Serializable;
+
+public class Accounts implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	private String username;
 	private String location;
 	private String accnumber;
 	private int pin;
 	private double balance;
-	Scanner sc = new Scanner(System.in);
 	
 	Accounts(){
 		
@@ -36,6 +40,7 @@ public class Accounts {
 	}
 	
 	public void setBalance(double amount) {
+		Scanner sc = new Scanner(System.in);
 		while(amount<=100) {
 			System.out.println("Please enter the a valid number above 100.");
 			amount = sc.nextDouble();
@@ -50,12 +55,13 @@ public class Accounts {
 	public double getBalance() {
 		return balance;
 	}
-	public void withdraw(double amount) {
+	public void withdraw(double amount) throws InsufficentFundsException{
 		if(amount < getBalance()) {
 			balance -= amount;
 			System.out.println(amount);
 		}
 		else if(amount == getBalance()) {
+			Scanner sc = new Scanner(System.in);
 			System.out.println("Your withdraw amount is same as ur balance do u want to withdraw ?\nIf yes click --> 1\nIf no click --> 2");
 			int ans = sc.nextInt();
 			switch(ans) {
@@ -69,16 +75,18 @@ public class Accounts {
 			}
 		}
 		else {
-			System.out.println("Entered amount is greater than ur balance");
-			System.out.println("Please enter amount less than or equals to your balance("+getBalance()+")");
+		    throw new InsufficentFundsException(
+		        "Withdrawal failed: Entered amount ₹" + amount +
+		        " exceeds available balance ₹" + getBalance()
+		    );
 		}
+
 	}
 	public void details() {
 		System.out.println();
 		System.out.println("The username is:- "+getName());
 		System.out.println("The account number is:- "+getAccnum());
 		System.out.println("The balance amount is:- "+getBalance());
-		System.out.println("The account number is:- "+getAccnum());
 		System.out.println("The location of the user is:- "+getlocation());
 		
 		System.out.println();
